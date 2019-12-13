@@ -14,7 +14,7 @@ if __name__ == "__main__":
     for settings, options, env_vars, build_requires, reference in builder.items:
 
       
-        named_builds[settings['compiler'] ].append([settings, options, env_vars, build_requires, reference])
+        named_builds[settings['compiler']+"_static" ].append([settings, options, env_vars, build_requires, reference])
 
     builder.named_builds = named_builds
 
