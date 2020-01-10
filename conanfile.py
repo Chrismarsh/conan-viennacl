@@ -7,9 +7,8 @@ class ViennaCLConan(ConanFile):
     version = "1.7.1"
     generators = "cmake"
     license = "http://viennacl.sourceforge.net/doc/manual-license.html"
-    # exports = ["FindViennaCL.cmake"]
     url="http://viennacl.sourceforge.net"
-
+    settings = None
     options = { 
         "with_opencl" :[True, False],
         "with_cuda": [True, False],
