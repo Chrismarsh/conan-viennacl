@@ -74,7 +74,7 @@ jobs:
         run: |
           python build.py
         env:
-          CONAN_CURRENT_PAGE: ${{matrix.cfg.compiler}}
+          CONAN_CURRENT_PAGE: ${{matrix.cfg.compiler}}_static
           CONAN_REFERENCE: viennacl/${{ matrix.lib-version}}
 
 
