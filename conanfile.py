@@ -23,15 +23,14 @@ class ViennaCLConan(ConanFile):
         "examples":  False
     }
 
-
+    _source_subfolder = 'viennacl'
 
     # def requirements(self):
     #     self.requires("netcdf-c/4.6.2")
 
     def source(self):
-        zip_name = "ViennaCL-%s.zip" % self.version
-        download("https://downloads.sourceforge.net/project/viennacl/1.7.x/%s" % zip_name , zip_name)
-        unzip(zip_name)
+        tools.get(**self.conan_data["sources"][self.version])
+        os.rename("ViennaCL-{}".format(self.version), self._source_subfolder)
 
     def configure_cmake(self):
         cmake = CMake(self)
@@ -40,8 +39,9 @@ class ViennaCLConan(ConanFile):
         cmake.definitions["ENABLE_CUDA"] = self.options.with_cuda
         cmake.definitions["ENABLE_OPENMP"] = self.options.with_omp
         cmake.definitions["BUILD_EXAMPLES"] = self.options.examples
-        cmake.configure(source_folder="ViennaCL-%s"%self.version)
+        cmake.configure(source_folder=self._source_subfolder)
         return cmake
+        
     def build(self):
 
         cmake = self.configure_cmake()
